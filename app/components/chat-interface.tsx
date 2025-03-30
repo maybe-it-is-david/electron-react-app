@@ -1,11 +1,23 @@
-'use client'
-
 import { useState } from 'react'
 import { Button } from '@/app/components/ui/button'
 import { Textarea } from '@/app/components/ui/textarea'
 import { ScrollArea } from '@/app/components/ui/scroll-area'
 import { Copy, Download, ThumbsUp, ThumbsDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { toast } from 'sonner'
+
+// import { ipcRenderer } from 'electron'
+
+// async function callBackend(data: any): Promise<void> {
+//   try {
+//     // reason: using invoke provides a promise-based interface which is easier to work with
+//     const response = await ipcRenderer.invoke('dzb-test', data)
+//     console.log('backend response:', response)
+//     return response
+//   } catch (error) {
+//     console.error('error calling backend:', error)
+//   }
+// }
 
 interface Message {
   role: 'agent' | 'user'
@@ -75,10 +87,22 @@ export default function ChatInterface() {
           <Textarea
             placeholder="Type a message as a customer"
             value={input}
-            onChange={(e) => setInput(e.target.value)}
+            onChange={e => setInput(e.target.value)}
             className="min-h-[44px] max-h-32"
           />
-          <Button className="px-8">Send</Button>
+          <Button
+            className="px-8"
+            onClick={async e => {
+              toast.success('calling backend', {
+                position: 'bottom-left',
+              })
+              // const res = await callBackend({ key: 'value' })
+              // toast.success(`backend response: ${JSON.stringify(res, null, 2)}` + res, {
+              //   position: 'bottom-left',
+              // })
+            }}>
+            Send
+          </Button>
         </div>
       </div>
     </div>

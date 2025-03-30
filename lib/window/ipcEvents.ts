@@ -9,6 +9,19 @@ export const registerWindowIPC = (mainWindow: BrowserWindow) => {
   // Hide the menu bar
   mainWindow.setMenuBarVisibility(false)
 
+  // // handle the async request from the renderer
+  // ipcMain.handle('dzb-test', async (event, data: any) => {
+  //   // process data or do async operations
+  //   // return the result back to the renderer
+  //   // reason: keeping the business logic in the main process for security
+  //   // const result = await someAsyncFunction(data)
+  //   // return result
+  //   return {
+  //     message: 'Hello from the main process!',
+  //     data,
+  //   }
+  // })
+
   // Register window IPC
   handleIPC('init-window', () => {
     const { width, height } = mainWindow.getBounds()
